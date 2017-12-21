@@ -32,4 +32,3 @@ class Category(models.Model):
 
 class NewsStatus(models.Model):
     status = models.CharField(max_length=15)
-
