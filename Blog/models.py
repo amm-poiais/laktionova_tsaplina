@@ -10,12 +10,12 @@ class News(models.Model):
     timestamp = models.DateTimeField()
     user = models.ForeignKey(User, related_name='author', on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    attachment = models.BinaryField()
+    attachment = models.BinaryField(blank=True, null=True)
     status = models.ForeignKey('NewsStatus', on_delete=models.CASCADE)
-    comment = models.CharField(max_length=255)
+    comment = models.CharField(max_length=255, blank=True, null=True)
 
     def publish(self):
-        self.published_date = timezone.now()
+        self.timestamp = timezone.now()
         self.save()
 
 
