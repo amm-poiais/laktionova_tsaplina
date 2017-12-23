@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as django_login
 from django.http import HttpResponseRedirect
+from Blog.models import User
 
+"""
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'users.html', {'users': users})
+"""
 
 def login(request):
     if request.method == 'POST':
@@ -14,6 +21,7 @@ def login(request):
         if user is not None:
             django_login(request, user)
             return HttpResponseRedirect('/users')
+            #return HttpResponseRedirect('/main' )
         else:
             return HttpResponseRedirect('/login')
     else:
@@ -22,4 +30,20 @@ def login(request):
             request,
             'login.html',
             {'login_form': form})
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = authenticate(username=form.cleaned_data.get('username'),
+                                password=form.cleaned_data.get('password1')
+                                )
+            django_login(request, user)
+            return redirect('/users')
+            #return redirect('/main')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
