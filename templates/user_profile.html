@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if user.first_name and user.last_name %}
+            {{user.first_name}} {{user.last_name}}
+        {% else %}
+            {{user.username}}
+        {% endif %}
+    </title>
+</head>
+<body>
+    <p>
+        {% if user.first_name and user.last_name %}
+            {{user.first_name}} {{user.last_name}}
+        {% else %}
+            {{user.username}}
+        {% endif %}
+    </p>
+    <p>
+        News:
+    </p>
+    <div id="all_user_news">
+        {% for user_news in all_user_news %}
+            <div class="news">
+                <p>Status: {{user_news.status.status}}</p>
+                {% ifequal user_news.status "Not published" %}
+                    <p>Moderator's comment: user_news.comment</p>
+                {% endifequal %}
+                <h2>{{user_news.title}}</h2>
+                <p>{{user_news.text}}</p>
+                {% if user_news.attachment %}
+                    <img src="{{ user_news.attachment.url }}" width="300" height="200" alt="{{ user_news.title }}" />
+                {% endif %}
+                <p>Posted on {{user_message.timestamp}}</p>s
+                {% empty %}
+                <p>Add your first news on main page.</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

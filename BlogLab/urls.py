@@ -19,5 +19,7 @@ from django.contrib import admin
 from Blog.views import *
 
 urlpatterns = [
+    url(r'^$', user_profile), #главная страница
     url(r'^admin/', admin.site.urls),
+    url(r'^user', user_profile),
 ]
