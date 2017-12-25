@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% block header %}
+        <div class="header_name">
+            <h1 style="text-align: center">BLOG</h1>
+        </div>
+        <div class="login_logout">
+            <a></a>
+        </div>
+        {% endblock %}
+    </header>
+    <main>
+        <div class="left_column" style="float: left;min-height: 1000px; width: 20%; background-color: #b6feb8;">
+            {% block left_column %}{% endblock %}
+        </div>
+        <div class="main_column" style="float: left;min-height: 1000px; width: 60%; background-color: #f3c1fb;">
+            {% block main_column %}{% endblock %}
+        </div>
+       <div class="right_column" style="float: left;min-height: 1000px; width: 20%; background-color: #ffb482;">
+            {% block right_column %}{% endblock %}
+        </div>
+    </main>
+    <footer>
+        {% block footer %}
+        <p>&copy; 2017</p>
+        {% endblock %}
+    </footer>
+</body>
+</html>
