@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+<body>
+    <p>
+        News:
+    </p>
+    <div id="news">
+        {% for post in news %}
+            <div class="news">
+                <h2>{{post.title}}</h2>
+                <p>{{post.text}}</p>
+                {% if post.attachment %}
+                    <img src="{{ post.attachment.url }}" width="300" height="200" alt="{{ post.title }}" />
+                {% endif %}
+                <p>Posted on {{post.timestamp}}</p>s
+                {% empty %}
+                <p>No news.</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -13,15 +13,14 @@ from Blog.models import News
 
 
 def user_profile(request):
-    user_id = request.GET.get('user_id', 3)
-    user = User.objects.get(pk=user_id)
+    user = request.user
     user_news = News.objects.filter(
         user=user).order_by('-id')
     user_news = [
         {
             'title': user_post.title,
             'text': user_post.text,
-            'attachment.url': user_post.attachment.url,
+            'attachment': user_post.attachment,
             'timestamp': user_post.timestamp,
             'category': user_post.category
         }
@@ -32,6 +31,27 @@ def user_profile(request):
         'user_profile.html',
         {'user': user,
          'user_news': user_news})
+
+def main_page(request):
+    user = request.user
+    news = News.objects. filter(
+        status__status='Published').order_by('-id')
+    news = [
+        {
+            'title': user_news.title,
+            'text': user_news.text,
+            'attachment': user_news.attachment,
+            'timestamp': user_news.timestamp,
+            'category': user_news.category,
+            'user': user
+        }
+        for user_news in news
+    ]
+    return render(
+        request,
+        'main.html',
+        {'user': user,
+         'news': news})
 
 
 """
