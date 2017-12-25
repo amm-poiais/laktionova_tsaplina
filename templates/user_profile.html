@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>
+{% extends 'base.html' %}
+{% block title %}
         {% if user.first_name and user.last_name %}
             {{user.first_name}} {{user.last_name}}
         {% else %}
             {{user.username}}
         {% endif %}
-    </title>
-</head>
-<body>
+{% endblock %}
+
+{% block main_column %}
     <p>
         {% if user.first_name and user.last_name %}
             {{user.first_name}} {{user.last_name}}
@@ -39,5 +36,4 @@
             </div>
         {% endfor %}
     </div>
-</body>
-</html>
+{% endblock %}

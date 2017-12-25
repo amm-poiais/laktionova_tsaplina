@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Blog{% endblock %}
+
+{% block main_column %}
     <p>
         News:
     </p>
@@ -22,5 +19,4 @@
             </div>
         {% endfor %}
     </div>
-</body>
-</html>
+{% endblock %}
