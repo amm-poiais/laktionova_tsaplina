@@ -22,18 +22,18 @@
         News:
     </p>
     <div id="all_user_news">
-        {% for user_news in all_user_news %}
+        {% for post in all_user_news %}
             <div class="news">
-                <p>Status: {{user_news.status.status}}</p>
-                {% ifequal user_news.status "Not published" %}
-                    <p>Moderator's comment: user_news.comment</p>
+                <p>Status: {{post.status.status}}</p>
+                {% ifequal post.status "Not published" %}
+                    <p>Moderator's comment: post.comment</p>
                 {% endifequal %}
-                <h2>{{user_news.title}}</h2>
-                <p>{{user_news.text}}</p>
-                {% if user_news.attachment %}
+                <h2>{{post.title}}</h2>
+                <p>{{post.text}}</p>
+                {% if post.attachment %}
                     <img src="{{ user_news.attachment.url }}" width="300" height="200" alt="{{ user_news.title }}" />
                 {% endif %}
-                <p>Posted on {{user_message.timestamp}}</p>s
+                <p>Posted on {{post.timestamp}}</p>s
                 {% empty %}
                 <p>Add your first news on main page.</p>
             </div>
