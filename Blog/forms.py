@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, ModelChoiceField, ImageField, CharField, FileInput
+from django.forms import ModelForm, Textarea, ModelChoiceField, ImageField, CharField, FileInput,ChoiceField
 from Blog.models import *
 from django.utils.translation import ugettext_lazy as _
 
@@ -8,9 +8,8 @@ class NewsForm(ModelForm):
     text = CharField(max_length=255, required=False,
                      widget=Textarea(attrs={'cols': 30, 'rows': 10}))
     attachment = ImageField(label=_('Pic'),required=False,
-                            error_messages={'invalid':_("Image files only")},
                             widget=FileInput)
-    category = ModelChoiceField(queryset=Category.objects.values_list('name', flat=True).order_by('name'),
+    category = ModelChoiceField(queryset=Category.objects.all().order_by('name'),
                                 empty_label=None)
 
     class Meta:
