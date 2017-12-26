@@ -1,12 +1,15 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.models import User, AnonymousUser
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as django_login
 from django.http import HttpResponseRedirect
-from Blog.models import User
+from Blog.models import User, Category, NewsStatus
 from Blog.models import News
+from Blog.forms import NewsForm
+import datetime
 
 
 # Create your views here.
@@ -14,8 +17,7 @@ from Blog.models import News
 
 def user_profile(request):
     user = request.user
-    user_news = News.objects.filter(
-        user=user).order_by('-id')
+    user_news = News.objects.filter(user=user).order_by('-id')
     user_news = [
         {
             'title': user_post.title,
@@ -31,6 +33,7 @@ def user_profile(request):
         'user_profile.html',
         {'user': user,
          'user_news': user_news})
+
 
 def main_page(request):
     user = request.user
@@ -54,13 +57,6 @@ def main_page(request):
          'news': news})
 
 
-"""
-def user_list(request):
-    users = User.objects.all()
-    return render(request, 'users.html', {'users': users})
-"""
-
-
 def login(request):
     if request.method == 'POST':
         user = authenticate(
@@ -69,8 +65,8 @@ def login(request):
             password=request.POST['password'])
         if user is not None:
             django_login(request, user)
-            return HttpResponseRedirect('/users')
-            #return HttpResponseRedirect('/main' )
+            #return HttpResponseRedirect('/users')
+            return HttpResponseRedirect('/' )
         else:
             return HttpResponseRedirect('/login')
     else:
@@ -90,8 +86,8 @@ def signup(request):
                                 password=form.cleaned_data.get('password1')
                                 )
             django_login(request, user)
-            return redirect('/users')
-            #return redirect('/main')
+            #return redirect('/users')
+            return redirect('/main')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -104,3 +100,24 @@ def log_out(request):
     else:
         return render(request, 'logout.html')
 
+
+def create_news(request):
+    if request.method == 'POST':
+        fm = NewsForm(request.POST, request.FILES)
+        if fm.is_valid():
+            news = News()
+            news.user_id = request.user.id
+            news.title = fm.cleaned_data['title']
+            news.text = fm.cleaned_data['text']
+            news.attachment = fm.cleaned_data['attachment']
+            news.timestamp = datetime.datetime.now()
+            news.status = NewsStatus.objects.get(status='In pending')
+            news.category_id = fm.cleaned_data['category'].id
+            news.save()
+            return redirect('/user')
+    else:
+        fm = NewsForm()
+    return render(
+        request,
+        'create_news.html',
+        {'fm': fm})
