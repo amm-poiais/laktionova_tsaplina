@@ -22,6 +22,8 @@ class News(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
 
 class NewsStatus(models.Model):
     status = models.CharField(max_length=15)
