@@ -1,12 +1,10 @@
-from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.shortcuts import render, redirect, reverse
-from django.contrib.auth.models import User, AnonymousUser
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as django_login
 from django.http import HttpResponseRedirect
-from Blog.models import User, Category, NewsStatus
+from Blog.models import NewsStatus
 from Blog.models import News
 from Blog.forms import NewsForm
 import datetime
@@ -37,8 +35,8 @@ def user_profile(request):
 
 def main_page(request):
     user = request.user
-    news = News.objects. filter(
-        status__status='Published').order_by('-id')
+    news = News.objects.all()
+    # news = News.objects.filter(status__status='Published').order_by('-id')
     news = [
         {
             'title': user_news.title,
@@ -65,8 +63,7 @@ def login(request):
             password=request.POST['password'])
         if user is not None:
             django_login(request, user)
-            #return HttpResponseRedirect('/users')
-            return HttpResponseRedirect('/' )
+            return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect('/login')
     else:
@@ -86,8 +83,7 @@ def signup(request):
                                 password=form.cleaned_data.get('password1')
                                 )
             django_login(request, user)
-            #return redirect('/users')
-            return redirect('/main')
+            return redirect('/')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -96,7 +92,7 @@ def signup(request):
 def log_out(request):
     if request.method == 'POST':
         logout(request)
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect('/')
     else:
         return render(request, 'logout.html')
 
