@@ -1,11 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}
-        {% if user.first_name and user.last_name %}
-            {{user.first_name}} {{user.last_name}}
-        {% else %}
-            {{user.username}}
-        {% endif %}
-{% endblock %}
+{% block title %}{{user.username}}{% endblock %}
 
 {% block main_column %}
     <p>
@@ -18,10 +12,10 @@
     <p>
         News:
     </p>
-    <div id="all_user_news">
-        {% for post in all_user_news %}
+    <div id="user_news">
+        {% for post in user_news %}
             <div class="news">
-                <p>Status: {{post.status.status}}</p>
+                <p>Status: {{post.status__status}}</p>
                 {% ifequal post.status "Not published" %}
                     <p>Moderator's comment: post.comment</p>
                 {% endifequal %}
