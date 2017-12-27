@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^login[/]?$', login),
     url(r'^error[/]?$', error),
     url(r'^search[/]?$', search),
+    url(r'^logout[/]?$', logout)
 ]
 
 if settings.DEBUG:
