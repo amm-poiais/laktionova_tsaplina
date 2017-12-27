@@ -1,4 +1,5 @@
-from django.forms import ModelForm, Textarea, ModelChoiceField, ImageField, CharField, FileInput,ChoiceField
+from django import forms
+from django.forms import ModelForm, Textarea, ModelChoiceField, ImageField, CharField, FileInput, SelectDateWidget
 from Blog.models import *
 from django.utils.translation import ugettext_lazy as _
 
@@ -22,3 +23,22 @@ class NewsForm(ModelForm):
             'attachment': _('Attachment')
         }
 
+
+CHOICES = [('category', 'By Category'),
+           ('pub_date', 'By Publication Date')
+           ]
+
+
+class SearchForm(forms.Form):
+    options = forms.ChoiceField(label=_('Options'), choices=CHOICES, widget=forms.RadioSelect(), initial=CHOICES[0][0])
+    category = ModelChoiceField(label=_('Category'), queryset=Category.objects.all().order_by('name'),
+                                empty_label=None)
+    pub_date = forms.DateField(label=_('Date'),widget=SelectDateWidget)
+
+    """class Meta:
+        fields = ['options', 'category', 'pub_date']
+        labels = {
+            #'options': _('Options'),
+            'category': _('Category'),
+            'pub_date': _('Publication date')
+            }"""

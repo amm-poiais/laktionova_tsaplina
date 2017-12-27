@@ -6,7 +6,7 @@ from django.contrib.auth import login as django_login
 from django.http import HttpResponseRedirect
 from Blog.models import NewsStatus
 from Blog.models import News
-from Blog.forms import NewsForm
+from Blog.forms import NewsForm, SearchForm
 import datetime
 
 
@@ -36,6 +36,8 @@ def user_profile(request):
 
 
 def main_page(request):
+    if True:
+        return error(request)
     user = request.user
     news = News.objects.all()
     # news = News.objects.filter(status__status='Published').order_by('-id')
@@ -118,4 +120,18 @@ def create_news(request):
     return render(
         request,
         'create_news.html',
+        {'fm': fm})
+
+
+def error(request):
+    return render(
+        request,
+        'error.html')
+
+
+def search(request):
+    fm = SearchForm()
+    return render(
+        request,
+        'search.html',
         {'fm': fm})

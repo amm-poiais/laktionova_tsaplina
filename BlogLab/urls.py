@@ -25,7 +25,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user[/]?$', user_profile),
     url(r'^create_news[/]?$', create_news),
-    url(r'^login[/]?$', login)
+    url(r'^login[/]?$', login),
+    url(r'^error[/]?$', error),
+    url(r'^search[/]?$', search),
 ]
 
 if settings.DEBUG:
