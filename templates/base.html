@@ -3,12 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <style type="text/css">
+        body{
+            margin:0;
+        }
+        .main_column{
+            background-color: #f3c1fb;
+            width:60%;
+            margin-left:20%;
+            margin-right:20%;
+            padding:20px;
+        }
+        .menu{
+            background-color: #333333;
+            padding-left:20%;
+            padding-right:20%;
+        }
+        .menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+        }
+        .menu li {
+            float: left;
+        }
+        .menu li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .menu li a:hover {
+            background-color: #111111;
+        }
+        a:link, a:visited {
+            color: #000000;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <header>
         {% block header %}
         <div class="header_name">
-            <h1 style="text-align: center">BLOG</h1>
+            <h1 style="text-align: center"><a href="/">BLOG</a></h1>
         </div>
         <div class="login_logout">
             <a></a>
@@ -16,14 +57,29 @@
         {% endblock %}
     </header>
     <main>
-        <div class="left_column" style="float: left;min-height: 1000px; width: 20%; background-color: #b6feb8;">
-            {% block left_column %}{% endblock %}
-        </div>
-        <div class="main_column" style="float: left;min-height: 1000px; width: 60%; background-color: #f3c1fb;">
-            {% block main_column %}{% endblock %}
-        </div>
-       <div class="right_column" style="float: left;min-height: 1000px; width: 20%; background-color: #ffb482;">
-            {% block right_column %}{% endblock %}
+        <div>
+            <div class="menu">
+                <ul>
+                  {% if request.user.is_staff %}
+                      <li><a href="#">Admin</a></li>
+                  {% endif %}
+                  <li><a href="search.html">Search</a></li>
+                  {% if request.user %}
+                    <li><a href="logout.html">Log out</a></li>
+                  {% else %}
+                    <li><a href="login.html">Log in</a></li>
+                  {% endif %}
+                </ul>
+            </div>
+            <!--<div class="left_column" style=" display:inline-block; min-width: 20%; background-color: #b6feb8;">
+                {% block left_column %}{% endblock %}
+            </div>-->
+            <div class="main_column" style="" >
+                {% block main_column %}{% endblock %}
+            </div>
+           <!--<div class="right_column" style=" display:inline-block; min-width: 20%; background-color: #ffb482;">
+                {% block right_column %}{% endblock %}
+            </div>-->
         </div>
     </main>
     <footer>
