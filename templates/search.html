@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block main_column %}
+    <h2>Search it!</h2>
+    {% if search %}
+        <form method="post">
+            {% csrf_token %}
+            {{fm.as_p}}
+            <p>
+                <input type="submit">
+            </p>
+        </form>
+    {% else %}
+        <div id="search_res">
+            {% for post in res_list %}
+                <div class="news">
+                    <h2>{{post.title}}</h2>
+                    <p>{{post.text}}</p>
+                    {% if post.attachment %}
+                        <img src="{{ post.attachment.url }}" width="300" height="200" alt="{{ post.title }}" />
+                    {% endif %}
+                    <p>Posted on {{post.timestamp}}</p>
+                    {% empty %}
+                    <p>No news found.</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

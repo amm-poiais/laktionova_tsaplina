@@ -128,8 +128,25 @@ def error(request):
 
 
 def search(request):
-    fm = SearchForm()
+    res_list = None
+    if request.method == 'POST':
+        flag = False
+        fm = SearchForm(request.POST, request.FILES)
+        if fm.is_valid():
+            if fm.cleaned_data['options'] == 'category':
+                ctg = fm.cleaned_data['category']
+                res_list = News.objects.filter(category=ctg)
+            else:
+                p_d = fm.cleaned_data['pub_date']
+                res_list = News.objects.filter(timestamp__year=p_d.year,
+                                               timestamp__month=p_d.month,
+                                               timestamp__day=p_d.day)
+    else:
+        fm = SearchForm()
+        flag = True
     return render(
         request,
         'search.html',
-        {'fm': fm})
+        {'fm': fm,
+         'search': flag,
+         'res_list': res_list})
