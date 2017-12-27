@@ -22,7 +22,9 @@ def user_profile(request):
             'text': user_post.text,
             'attachment': user_post.attachment,
             'timestamp': user_post.timestamp,
-            'category': user_post.category
+            'category': user_post.category,
+            'status': user_post.status,
+            'comment': user_post.comment
         }
         for user_post in user_news
     ]

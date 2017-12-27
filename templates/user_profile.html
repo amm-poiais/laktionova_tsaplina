@@ -11,9 +11,9 @@
     <div id="user_news">
         {% for post in user_news %}
             <div class="news">
-                <p>Status: {{post.status__status}}</p>
+                <p>Status: {{post.status.status}}</p>
                 {% ifequal post.status "Not published" %}
-                    <p>Moderator's comment: post.comment</p>
+                    <p>Moderator's comment: {{ post.comment }}</p>
                 {% endifequal %}
                 <h2>{{post.title}}</h2>
                 <p>{{post.text}}</p>
