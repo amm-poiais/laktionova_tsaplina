@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Blog{% endblock %}
-
+{% block header %}
+    <div>
+        <a href='login/'>Log in</a>/<a href='/signup'>Sign up</a>
+    </div>
+{% endblock %}
 {% block main_column %}
     <p>
         News:

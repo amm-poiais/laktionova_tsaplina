@@ -36,8 +36,6 @@ def user_profile(request):
 
 
 def main_page(request):
-    if True:
-        return error(request)
     user = request.user
     news = News.objects.all()
     # news = News.objects.filter(status__status='Published').order_by('-id')
