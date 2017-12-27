@@ -12,7 +12,8 @@
             width:60%;
             margin-left:20%;
             margin-right:20%;
-            padding:20px;
+            padding:25px;
+            word-wrap: break-word;
         }
         .menu{
             background-color: #333333;
@@ -43,6 +44,12 @@
             color: #000000;
             text-decoration: none;
         }
+
+        .footer{
+            margin-left: 20%;
+            margin-right: 20%;
+            text-align:center;
+        }
     </style>
 </head>
 <body>
@@ -51,9 +58,6 @@
         <div class="header_name">
             <h1 style="text-align: center"><a href="/">BLOG</a></h1>
         </div>
-        <div class="login_logout">
-            <a></a>
-        </div>
         {% endblock %}
     </header>
     <main>
@@ -61,8 +65,10 @@
             <div class="menu">
                 <ul>
                   {% if request.user.is_staff %}
-                      <li><a href="#">Admin</a></li>
+                      <li><a href="/">Admin</a></li>
+                      <li><a href="admin/">New admin</a></li>
                   {% endif %}
+
                   <li><a href="search/">Search</a></li>
                   {% if request.user.is_authenticated %}
                       <li><a href="create_news/">Create news</a></li>
@@ -86,7 +92,9 @@
     </main>
     <footer>
         {% block footer %}
-        <p>&copy; 2017</p>
+            <div class="footer">
+                 <p>&copy; 2017</p>
+            </div>
         {% endblock %}
     </footer>
 </body>

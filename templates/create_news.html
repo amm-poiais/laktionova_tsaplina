@@ -1,7 +1,11 @@
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{fm.as_p}}
-    <p>
-        <input type="submit">
-    </p>
-</form>
+{% extends 'base.html' %}
+
+{% block main_column %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{fm.as_p}}
+        <p>
+            <input type="submit">
+        </p>
+    </form>
+{% endblock %}
