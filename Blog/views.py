@@ -92,11 +92,8 @@ def signup(request):
 
 
 def log_out(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('/')
-    else:
-        return render(request, 'logout.html')
+    logout(request)
+    return redirect('/')
 
 
 def create_news(request):
