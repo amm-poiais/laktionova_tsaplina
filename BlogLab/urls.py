@@ -23,6 +23,7 @@ from Blog.views import *
 urlpatterns = [
     url(r'^$', main_page), #главная страница
     url(r'^admin/', admin.site.urls),
+    url(r'^moderate[/]?$', moderate),
     url(r'^user[/]?$', user_profile),
     url(r'^create_news[/]?$', create_news),
     url(r'^login[/]?$', login),
