@@ -37,8 +37,8 @@ def user_profile(request):
 
 def main_page(request):
     user = request.user
-    news = News.objects.all()
-    # news = News.objects.filter(status__status='Published').order_by('-id')
+    #news = News.objects.all()
+    news = News.objects.filter(status__status='Published').order_by('-id')
     news = [
         {
             'title': user_news.title,
