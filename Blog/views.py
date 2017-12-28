@@ -160,3 +160,23 @@ def moderate(request):
         'moderate.html',
         {'news': news_list,
          'fm': fm})
+
+
+def moderate_news(request):
+    if request.method == 'POST':
+        fm = SearchForm(request.POST)
+        if fm.is_valid():
+            post = News.objects.get(id=request.POST['news_id'])
+            if fm.cleaned_data['actions'] == 'publish':
+                post.status = NewsStatus.objects.get(status == 'Published')
+            else:
+                post.status = NewsStatus.objects.get(status == 'Rejected')
+
+    else:
+        post = News.objects.get(id=request.GET['news_id'])
+        fm = ModerateForm()
+    return render(
+        request,
+        'moderate_news.html',
+        {'post': post,
+         'fm': fm})
