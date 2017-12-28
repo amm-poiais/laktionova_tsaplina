@@ -37,8 +37,8 @@ def user_profile(request):
 
 def main_page(request):
     user = request.user
-    news = News.objects.all()
-    # news = News.objects.filter(status__status='Published').order_by('-id')
+    #news = News.objects.all()
+    news = News.objects.filter(status__status='Published').order_by('-id')
     news = [
         {
             'title': user_news.title,
@@ -150,3 +150,12 @@ def search(request):
         {'fm': fm,
          'search': flag,
          'res_list': res_list})
+
+
+def moderate(request):
+    news_list = News.objects.filter(status__status='In pending').order_by('-id')
+    return render(
+        request,
+        'moderate.html',
+        {'news_id': None,
+         'news': news_list})
