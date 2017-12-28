@@ -153,9 +153,28 @@ def search(request):
 
 
 def moderate(request):
-    news_list = News.objects.filter(status__status='In pending').order_by('-id')
-    return render(
-        request,
-        'moderate.html',
-        {'news_id': None,
-         'news': news_list})
+    if request.method == 'POST':
+        fm = ModerateForm(request.POST, request.FILES)
+        if fm.is_valid():
+            news = News.objects.get(news_id == request.POST['news_id'])
+            if fm.cleaned_data['actions'] == 'publish':
+                news.status = NewsStatus.objects.get(status == 'Published')
+            else:
+                news.status = NewsStatus.objects.get(status == 'Rejected')
+    else:
+        news_list = None
+        fm = None
+        post = None
+        if request.post is None:
+            news_list = News.objects.filter(status__status='In pending').order_by('-id')
+        else:
+            fm = ModerateForm()
+            post = News.objects.get(news_id == request.GET['news_id'])
+
+        return render(
+            request,
+            'moderate.html',
+            {'news_id': request.POST['news_id'],
+             'news': news_list,
+             'post': post,
+                'fm': fm})
