@@ -26,5 +26,12 @@
             {% endif %}
             <p>Posted on {{post.timestamp}} by {{ post.user.username }}</p>
         </div>
+        <form method="post">
+            {% csrf_token %}
+            {{fm.as_p}}
+            <p>
+                <input type="submit">
+            </p>
+        </form>
     {% endif %}
 {% endblock %}
