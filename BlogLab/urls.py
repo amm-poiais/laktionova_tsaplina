@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^login[/]?$', login),
     url(r'^error[/]?$', error),
     url(r'^search[/]?$', search),
-    url(r'^logout[/]?$', logout)
+    url(r'^logout[/]?$', log_out)
 ]
 
 if settings.DEBUG:
