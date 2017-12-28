@@ -150,3 +150,12 @@ def search(request):
         {'fm': fm,
          'search': flag,
          'res_list': res_list})
+
+
+def moderate(request):
+    news_list = News.objects.filter(status__status='In pending').order_by('-id')
+    return render(
+        request,
+        'moderate.html',
+        {'news_id': None,
+         'news': news_list})
