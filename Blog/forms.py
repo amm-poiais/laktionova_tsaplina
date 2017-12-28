@@ -24,7 +24,8 @@ class NewsForm(ModelForm):
         }
 
 
-ACTIONS = [('Publish', 'Publish'), ('Reject', 'Reject')]
+ACTIONS = [('publish', 'Publish'), ('reject', 'Reject')]
+
 
 class ModerateForm(forms.Form):
     comment = CharField(max_length=255, required=False, widget=Textarea(attrs={'cols': 30, 'rows': 10}))

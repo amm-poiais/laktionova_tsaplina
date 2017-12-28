@@ -5,7 +5,7 @@
         <h2>{{post.title}}</h2>
         <p>{{post.text}}</p>
         {% if post.attachment %}
-            <img src="{{ post.attachment.url }}" width="300" height="200" alt="{{ post.title }}" />
+            <img src="{{ post.attachment.url }}" width="300" alt="{{ post.title }}" />
         {% endif %}
         <p>Posted on {{post.timestamp}} by {{ post.user.username }}</p>
     </div>

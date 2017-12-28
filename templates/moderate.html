@@ -7,10 +7,10 @@
                     <h2>{{post.title}}</h2>
                     <p>{{post.text}}</p>
                     {% if post.attachment %}
-                        <img src="{{ post.attachment.url }}" width="300" height="200" alt="{{ post.title }}" />
+                        <img src="{{ post.attachment.url }}" width="300" alt="{{ post.title }}" />
                     {% endif %}
                     <p>Posted on {{post.timestamp}} by {{ post.user.username }}</p>
-                    <a href="moderate_news?news_id={{post.id}}">link</a>
+                    <b><a href="/moderate_news?news_id={{post.id}}">MODERATE</a></b>
                     {% empty %}
                     <p>No news in pending.</p>
                 </div>

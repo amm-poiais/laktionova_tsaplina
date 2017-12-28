@@ -106,10 +106,10 @@ def create_news(request):
             news.text = fm.cleaned_data['text']
             news.attachment = fm.cleaned_data['attachment']
             news.timestamp = datetime.datetime.now()
-            news.status = NewsStatus.objects.get(status='In pending')
+            news.status = NewsStatus.objects.get(status='Pending')
             news.category_id = fm.cleaned_data['category'].id
             news.save()
-            return redirect('/user')
+            return redirect('/')
     else:
         fm = NewsForm()
     return render(
@@ -150,7 +150,7 @@ def search(request):
 
 
 def moderate(request):
-    news_list = News.objects.filter(status__status='In pending').order_by('-id')
+    news_list = News.objects.filter(status__status='Pending').order_by('-id')
     fm = ModerateForm()
     return render(
         request,
@@ -161,19 +161,21 @@ def moderate(request):
 
 def moderate_news(request):
     if request.method == 'POST':
-        fm = SearchForm(request.POST)
+        fm = ModerateForm(request.POST)
         if fm.is_valid():
-            post = News.objects.get(id=request.POST['news_id'])
+            post = News.objects.get(id=request.GET['news_id'])
             if fm.cleaned_data['actions'] == 'publish':
-                post.status = NewsStatus.objects.get(status == 'Published')
+                post.status = NewsStatus.objects.get(status='Published')
             else:
-                post.status = NewsStatus.objects.get(status == 'Rejected')
-
+                post.status = NewsStatus.objects.get(status='Rejected')
+                post.comment = fm.cleaned_data['comment']
+            post.save()
+        return redirect('/moderate')
     else:
         post = News.objects.get(id=request.GET['news_id'])
         fm = ModerateForm()
-    return render(
-        request,
-        'moderate_news.html',
-        {'post': post,
-         'fm': fm})
+        return render(
+            request,
+            'moderate_news.html',
+            {'post': post,
+             'fm': fm})
