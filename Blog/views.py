@@ -46,7 +46,7 @@ def main_page(request):
             'attachment': user_news.attachment,
             'timestamp': user_news.timestamp,
             'category': user_news.category,
-            'user': user
+            'user': user_news.user
         }
         for user_news in news
     ]
