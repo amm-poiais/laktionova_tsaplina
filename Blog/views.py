@@ -6,7 +6,7 @@ from django.contrib.auth import login as django_login
 from django.http import HttpResponseRedirect
 from Blog.models import NewsStatus
 from Blog.models import News
-from Blog.forms import NewsForm, SearchForm
+from Blog.forms import NewsForm, SearchForm, ModerateForm
 import datetime
 
 
@@ -156,20 +156,20 @@ def moderate(request):
     if request.method == 'POST':
         fm = ModerateForm(request.POST, request.FILES)
         if fm.is_valid():
-            news = News.objects.get(news_id == request.POST['news_id'])
+            news = News.objects.get(id=request.POST['news_id'])
             if fm.cleaned_data['actions'] == 'publish':
-                news.status = NewsStatus.objects.get(status == 'Published')
+                news.status = NewsStatus.objects.get(status='Published')
             else:
-                news.status = NewsStatus.objects.get(status == 'Rejected')
+                news.status = NewsStatus.objects.get(status='Rejected')
     else:
         news_list = None
         fm = None
         post = None
-        if request.post is None:
+        if True:
             news_list = News.objects.filter(status__status='In pending').order_by('-id')
         else:
             fm = ModerateForm()
-            post = News.objects.get(news_id == request.GET['news_id'])
+            post = News.objects.get(id=request.GET['news_id'])
 
         return render(
             request,
