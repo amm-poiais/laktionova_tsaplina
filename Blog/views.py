@@ -94,7 +94,7 @@ def signup(request):
 def log_out(request):
     if request.method == 'POST':
         logout(request)
-        return HttpResponseRedirect('/')
+        return redirect('/')
     else:
         return render(request, 'logout.html')
 
