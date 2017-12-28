@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block main_column %}
-        <div id="news">
-            {% for post in news %}
-                <div class="news">
-                    <h2>{{post.title}}</h2>
-                    <p>{{post.text}}</p>
-                    {% if post.attachment %}
-                        <img src="{{ post.attachment.url }}" width="300" alt="{{ post.title }}" />
-                    {% endif %}
-                    <p>Posted on {{post.timestamp}} by {{ post.user.username }}</p>
-                    <b><a href="/moderate_news?news_id={{post.id}}">MODERATE</a></b>
-                    {% empty %}
-                    <p>No news in pending.</p>
-                </div>
-            {% endfor %}
-        </div>
+    <div id="news">
+        {% for post in news %}
+            <div class="news">
+                <h2>{{post.title}}</h2>
+                <p>{{post.text}}</p>
+                {% if post.attachment %}
+                    <img src="{{ post.attachment.url }}" width="300" alt="{{ post.title }}" />
+                {% endif %}
+                <p>Posted on {{post.timestamp}} by {{ post.user.username }}</p>
+                <b><a class='btn' href="/moderate_news?news_id={{post.id}}">MODERATE</a></b>
+                {% empty %}
+                <p>No news in pending.</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
