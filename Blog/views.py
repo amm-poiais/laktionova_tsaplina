@@ -150,6 +150,8 @@ def search(request):
 
 
 def moderate(request):
+    if not request.user.is_staff:
+        return error(request)
     news_list = News.objects.filter(status__status='Pending').order_by('-id')
     fm = ModerateForm()
     return render(
