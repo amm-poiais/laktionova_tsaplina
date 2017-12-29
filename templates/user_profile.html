@@ -9,7 +9,7 @@
         {% if user_news %}
             {% for post in user_news %}
                 <div class="news">
-                    <div class='title'>{{post.title}}</div>
+                    <div class='post-title'>{{post.title}}</div>
 
                     <p class="status">Status: {{post.status.status}}</p>
                     {% ifequal post.status "Not published" %}
@@ -28,6 +28,7 @@
                         {% endif %}
                         <div class="text">{{post.text}}</div>
                     </div>
+                    <p class='category'>Category: <pre class="pre-category">{{ post.category }}</pre></p>
                 </div>
             {% endfor %}
         {% else %}

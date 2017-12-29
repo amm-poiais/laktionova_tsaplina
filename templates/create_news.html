@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block main_column %}
-    <form method="post" enctype="multipart/form-data">
+    <div id="page-title">Create it!</div>
+    <form id='fm-create' method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{fm.as_p}}
-        <p>
+        <p align="center">
             <input type="submit">
         </p>
     </form>

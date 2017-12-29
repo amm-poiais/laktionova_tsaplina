@@ -28,8 +28,9 @@ ACTIONS = [('publish', 'Publish'), ('reject', 'Reject')]
 
 
 class ModerateForm(forms.Form):
-    comment = CharField(max_length=255, required=False, widget=Textarea(attrs={'cols': 30, 'rows': 10}))
     actions = forms.ChoiceField(label=_('Actions'), choices=ACTIONS, widget=forms.RadioSelect(), initial=ACTIONS[0][0])
+    comment = CharField(max_length=255, required=False, widget=Textarea(attrs={'cols': 30, 'rows': 10}))
+
 
 
 
