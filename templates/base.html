@@ -15,14 +15,15 @@
             margin-left:20%;
             margin-right:20%;
         }
-        .main_column{
+        .main-column{
             width:60%;
-            padding-left:20%;
-            padding-right:20%;
+            min-height: 450px;
+            margin-left:20%;
+            margin-right:20%;
             word-wrap: break-word;
+            background-color: #f8eee7;
         }
         .menu{
-
             background-color: #49274a;
             margin-left:20%;
             margin-right:20%;
@@ -61,14 +62,25 @@
             text-align:center;
         }
 
-        #news{
-            background-color: #f8eee7;
-
+        #message{
+            padding: 40px;
+            font-weight: bold;
+            font-size: 28px;
+            margin: 0;
+        }
+        #page-title{
+            padding: 20px 40px 0;
+            margin: 0;
+            font-weight: bold;
+            font-size: 28px;
+            text-align:center;
+        }
+        #news, #user-news{
+            padding: 40px;
         }
         .news {
             display: block;
-            padding: 20px 50px;
-            /*border: 2px dotted black;*/
+            padding-bottom: 50px;
         }
 
         .btn {
@@ -82,10 +94,18 @@
             font-weight: bold;
             font-size: 30px;
         }
-        .pub_data{
+        .pub-data{
             font-style: italic;
+            margin: 5px 0;
+        }
+        .status{
+            margin: 5px 0;
+        }
+        .moderator-comment{
+
         }
         .content{
+            overflow: auto;
         }
         .pic{
             max-width: 150px;
@@ -93,14 +113,14 @@
             margin-right: 20px;
         }
         .text{
-            margin: 25px 50px 50px 25px;
+            margin: 5px 50px 20px 25px;
         }
     </style>
 </head>
 <body>
     <header>
         {% block header %}
-        <div class="header_name">
+        <div class="header-name">
             <h1 style="text-align: center"><a href="/">BLOG</a></h1>
         </div>
         {% endblock %}
@@ -127,15 +147,11 @@
                   {% endif %}
                 </ul>
             </div>
-            <!--<div class="left_column" style=" display:inline-block; min-width: 20%; background-color: #b6feb8;">
-                {% block left_column %}{% endblock %}
-            </div>-->
-            <div class="main_column" style="" >
-                {% block main_column %}{% endblock %}
+            <div class="main-column">
+                {% block main_column %}
+
+                {% endblock %}
             </div>
-           <!--<div class="right_column" style=" display:inline-block; min-width: 20%; background-color: #ffb482;">
-                {% block right_column %}{% endblock %}
-            </div>-->
         </div>
     </main>
     <footer>

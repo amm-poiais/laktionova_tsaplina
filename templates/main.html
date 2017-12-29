@@ -4,19 +4,21 @@
 
 {% block main_column %}
     <div id='news'>
-        {% for post in news %}
-            <div class='news'>
-                <div class='title'>{{post.title}}</div>
-                <p class='pub_data'>Posted on {{post.timestamp}} by <b>{{ post.user.username }}</b></p>
-                <div class="content">
-                    {% if post.attachment %}
-                        <img src="{{ post.attachment.url }}" alt="{{ post.title }}" class='pic'/>
-                    {% endif %}
-                    <div class="text">{{post.text}}</div>
+        {% if news %}
+            {% for post in news %}
+                <div class='news'>
+                    <div class='title'>{{post.title}}</div>
+                    <p class='pub-data'>Posted on {{post.timestamp}} by <b>{{ post.user.username }}</b></p>
+                    <div class="content">
+                        {% if post.attachment %}
+                            <img src="{{ post.attachment.url }}" alt="{{ post.title }}" class='pic'/>
+                        {% endif %}
+                        <div class="text">{{post.text}}</div>
+                    </div>
                 </div>
-                {% empty %}
-                <p id='some'>No news.</p>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <p id='message'>No news yet :(</p>
+        {% endif %}
     </div>
 {% endblock %}
