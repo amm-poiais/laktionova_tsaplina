@@ -9,6 +9,7 @@
             background-color: #EED2EE;
             font: 100% Arial, sans-serif;
             word-wrap: break-word;
+            min-width: 900px;
         }
         header{
             background-color: #94618e;
@@ -16,6 +17,7 @@
         }
         #header-name{
             /*color: white;*/
+            font-size: 24px;
         }
         .main-column{
             width:60%;
@@ -53,7 +55,7 @@
             background-color: #111111;
         }
         a:link, a:visited {
-            color: #000000;
+            color: #f8eee7;
             text-decoration: none;
         }
 
@@ -121,7 +123,8 @@
             margin: 5px 0;
         }
         .moderator-comment{
-
+            background-color: #8B8386;
+            padding: 10px;
         }
         .content{
             padding: 20px;
@@ -137,10 +140,17 @@
             margin: 5px 0 20px;
             text-align: justify;
         }
-        .pre-category{
-            background-color: red;
+        .em-category{
+            background-color: #9D6B84;
+            color: white;
+            padding: 2px 10px;
         }
 
+        .em-status{
+            background-color: #8B8386;
+            color: white;
+            padding: 2px 10px;
+        }
         #fm-search{
             margin: 5% 35% 0;
             font-size: larger;
@@ -217,7 +227,24 @@
         }
 
          #fm-moderate textarea{
-            display: none;
+            /*display: none;*/
+        }
+
+        #fm-login{
+            margin: 7% 35% 0;
+            padding-bottom: 25px;
+            font-size: larger;
+            text-align: center;
+        }
+        #fm-login input{
+            border-radius: 5px;
+        }
+
+        #fm-login input[type=submit]{
+            padding: 7px;
+            background-color: #54C571;
+            margin: 0 20px;
+            font-size: 16px;
         }
 
     </style>

@@ -11,9 +11,9 @@
                 <div class="news">
                     <div class='post-title'>{{post.title}}</div>
 
-                    <p class="status">Status: {{post.status.status}}</p>
-                    {% ifequal post.status "Not published" %}
-                        <p class="moderator-comment">Moderator's comment: {{ post.comment }}</p>
+                    <p class="status">Status: <em class="em-status">{{post.status.status}}</em></p>
+                    {% ifequal post.status.status "Rejected" %}
+                        <p class="moderator-comment"><b>Moderator's comment:</b> {{ post.comment }}</p>
                     {% endifequal %}
 
                     {% ifequal post.status.status "Published" %}
@@ -28,7 +28,7 @@
                         {% endif %}
                         <div class="text">{{post.text}}</div>
                     </div>
-                    <p class='category'>Category: <pre class="pre-category">{{ post.category }}</pre></p>
+                    <p class='category'>Category: <em class="em-category">{{ post.category }}</em></p>
                 </div>
             {% endfor %}
         {% else %}
