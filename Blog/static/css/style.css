@@ -62,9 +62,14 @@ a:link, a:visited {
 }
 
 .footer {
-    margin-left: 20%;
-    margin-right: 20%;
     text-align: center;
+    background-color: #94618e;
+    color: #f8eee7;
+}
+
+.footer p{
+    margin: 0;
+    padding: 20px 0;
 }
 
 #message {
