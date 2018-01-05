@@ -37,7 +37,6 @@ def user_profile(request):
 
 def main_page(request):
     user = request.user
-    #news = News.objects.all()
     news = News.objects.filter(status__status='Published').order_by('-id')
     news = [
         {
@@ -132,12 +131,14 @@ def search(request):
         if fm.is_valid():
             if fm.cleaned_data['options'] == 'category':
                 ctg = fm.cleaned_data['category']
-                res_list = News.objects.filter(category=ctg)
+                res_list = News.objects.filter(category=ctg,
+                                               status__status='Published')
             else:
                 p_d = fm.cleaned_data['pub_date']
                 res_list = News.objects.filter(timestamp__year=p_d.year,
                                                timestamp__month=p_d.month,
-                                               timestamp__day=p_d.day)
+                                               timestamp__day=p_d.day,
+                                               status__status='Published')
     else:
         fm = SearchForm()
         flag = True
