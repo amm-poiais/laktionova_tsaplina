@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    Moderation page
+{% endblock %}
+
 {% block main_column %}
+    <div id="page-title">Moderate it!</div>
     <div id="news">
         {% if news %}
             {% for post in news %}
                 <div class="news">
                     <div class="top">
+                        <div class='btn'><a href="/moderate_news?news_id={{post.id}}">MODERATE</a></div>
                         <div class='post-title'>{{post.title}}</div>
-                        <div class='btn'><b><a href="/moderate_news?news_id={{post.id}}">MODERATE</a></b></div>
                     </div>
                     <p class='pub-data'>Created on {{post.timestamp}} by <b>{{ post.user.username }}</b></p>
                     <div class="content">
@@ -16,7 +21,7 @@
                         {% endif %}
                         <div class="text">{{post.text}}</div>
                     </div>
-                    <p class='category'>Category: {{ post.category }}</p>
+                    <p class='category'>Category: <em class="em-category">{{ post.category }}</em></p>
                 </div>
             {% endfor %}
         {% else %}

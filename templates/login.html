@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    Log In
+{% endblock %}
+
 {% block main_column %}
-    <div id="page-title">Sign in!</div>
+    <div id="page-title">Log in!</div>
     <form id='fm-login' method="post">
         {% csrf_token %}
         {{login_form.as_p}}

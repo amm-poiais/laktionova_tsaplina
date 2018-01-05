@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}Blog - Main{% endblock %}
 
 {% block main_column %}
     <div id='news'>
@@ -15,7 +15,7 @@
                         {% endif %}
                         <div class="text">{{post.text}}</div>
                     </div>
-                    <p class='category'>Category: {{ post.category }}</p>
+                    <p class='category'>Category: <em class="em-category">{{ post.category }}</em></p>
                 </div>
             {% endfor %}
         {% else %}

@@ -175,7 +175,8 @@ a:link, a:visited {
 #fm-search,
 #fm-create,
 #fm-moderate,
-#fm-login {
+#fm-login,
+#fm-signup {
     font-size: larger;
     padding-bottom: 25px;
 }
@@ -197,6 +198,24 @@ a:link, a:visited {
     text-align: center;
 }
 
+#fm-signup {
+    margin: 0 25%;
+}
+#fm-signup span {
+    font-size: 12px;
+    display: inline-block;
+    color: gray;
+}
+
+#fm-signup .errorlist{
+    display: none;
+    color: red;
+}
+
+#fm-signup ul.errorlist2 li{
+    color: red;
+}
+
 #fm-search ul,
 #fm-create ul,
 #fm-moderate ul,
@@ -207,7 +226,8 @@ a:link, a:visited {
 #fm-search input[type=submit],
 #fm-create input[type=submit],
 #fm-moderate input[type=submit],
-#fm-login input[type=submit] {
+#fm-login input[type=submit],
+#fm-signup input[type=submit] {
     padding: 7px;
     background-color: #54C571;
     border-radius: 5px;
@@ -225,7 +245,8 @@ a:link, a:visited {
 #fm-create textarea,
 #fm-moderate input,
 #fm-moderate textarea,
-#fm-login input {
+#fm-login input,
+#fm-signup input {
     border-radius: 5px;
 }
 
@@ -237,6 +258,11 @@ a:link, a:visited {
 #fm-moderate li {
     display: table-cell;
     padding-right: 15px;
+}
+
+#fm-signup li {
+    font-size: 12px;
+    color: gray;
 }
 
  #fm-moderate textarea {
