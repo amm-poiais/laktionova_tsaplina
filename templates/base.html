@@ -22,7 +22,7 @@
                 <ul>
                   {% if request.user.is_staff %}
                       <li><a href="/moderate/">Admin</a></li>
-                      {% if perms.Blog.can_add_user %}
+                      {% if request.user.is_staff %}
                         <li><a href="/admin/">New admin</a></li>
                       {% endif %}
                   {% endif %}
