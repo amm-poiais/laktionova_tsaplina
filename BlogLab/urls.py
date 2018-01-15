@@ -15,11 +15,25 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 from Blog.views import *
 
 urlpatterns = [
     url(r'^$', main_page), #главная страница
     url(r'^admin/', admin.site.urls),
-    url(r'^user', user_profile),
+    url(r'^moderate[/]?$', moderate),
+    url(r'^moderate_news[/]?$', moderate_news),
+    url(r'^user_profile[/]?$', user_profile),
+    url(r'^create_news[/]?$', create_news),
+    url(r'^login[/]?$', login),
+    url(r'^error[/]?$', error),
+    url(r'^search[/]?$', search),
+    #url(r'^search/$', search),
+    url(r'^logout[/]?$', log_out),
+    url(r'^signup[/]?$', signup),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

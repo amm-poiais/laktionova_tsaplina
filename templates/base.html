@@ -1,34 +1,55 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block scripts %}
+    {% endblock %}
 </head>
 <body>
     <header>
         {% block header %}
-        <div class="header_name">
-            <h1 style="text-align: center">BLOG</h1>
-        </div>
-        <div class="login_logout">
-            <a></a>
+        <div id="header-name">
+            <h1 style="text-align: center"><a href="/">BLOG</a></h1>
         </div>
         {% endblock %}
     </header>
     <main>
-        <div class="left_column" style="float: left;min-height: 1000px; width: 20%; background-color: #b6feb8;">
-            {% block left_column %}{% endblock %}
-        </div>
-        <div class="main_column" style="float: left;min-height: 1000px; width: 60%; background-color: #f3c1fb;">
-            {% block main_column %}{% endblock %}
-        </div>
-       <div class="right_column" style="float: left;min-height: 1000px; width: 20%; background-color: #ffb482;">
-            {% block right_column %}{% endblock %}
+        <div>
+            <div class="menu">
+                <ul>
+                  {% if request.user.is_staff %}
+                      <li><a href="/moderate/">Admin</a></li>
+                      {% if request.user.is_staff %}
+                        <li><a href="/admin/">New admin</a></li>
+                      {% endif %}
+                  {% endif %}
+
+                  <li><a href="/search/">Search</a></li>
+                  {% if request.user.is_authenticated %}
+                      <li><a href="/create_news/">Create news</a></li>
+                      <li><a href="/user_profile/">Profile</a></li>
+                      <li><a href="/logout/">Log out</a></li>
+                  {% else %}
+                      <li><a href="/login/">Log in</a></li>
+                      <li><a href="/signup/">Sign up</a></li>
+                  {% endif %}
+                </ul>
+            </div>
+            <div class="main-column">
+                {% block main_column %}
+
+                {% endblock %}
+            </div>
         </div>
     </main>
     <footer>
         {% block footer %}
-        <p>&copy; 2017</p>
+            <div class="footer">
+                 <p>&copy; 2017</p>
+            </div>
         {% endblock %}
     </footer>
 </body>

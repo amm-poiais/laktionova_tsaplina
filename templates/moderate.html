@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Moderation page
+{% endblock %}
+
+{% block main_column %}
+    <div id="page-title">Moderate it!</div>
+    <div id="news">
+        {% if news %}
+            {% for post in news %}
+                <div class="news">
+                    <div class="top">
+                        <div class='btn'><a href="/moderate_news?news_id={{post.id}}">MODERATE</a></div>
+                        <div class='post-title'>{{post.title}}</div>
+                    </div>
+                    <p class='pub-data'>Created on {{post.timestamp}} by <b>{{ post.user.username }}</b></p>
+                    <div class="content">
+                        {% if post.attachment %}
+                            <img class='pic' src="{{ post.attachment.url }}" alt="{{ post.title }}" />
+                        {% endif %}
+                        <div class="text">{{post.text}}</div>
+                    </div>
+                    <p class='category'>Category: <em class="em-category">{{ post.category }}</em></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p id='message'>No news pending.</p>
+        {% endif %}
+    </div>
+{% endblock %}

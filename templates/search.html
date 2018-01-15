@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+{% endblock %}
+
+{% block main_column %}
+    <div id="page-title">Search it!</div>
+    {% if search %}
+        <form id='fm-search' method="post">
+            {% csrf_token %}
+            {{fm.as_p}}
+            <p align="center">
+                <input type="submit">
+            </p>
+        </form>
+    {% else %}
+        <div id="search_res">
+            {% if res_list %}
+                {% for post in res_list %}
+                    <div class="news">
+                        <div class='post-title'>{{post.title}}</div>
+                        <p class='pub-data'>Posted on {{post.timestamp}} by <b>{{ post.user.username }}</b></p>
+                        <div class="content">
+                            {% if post.attachment %}
+                                <img class='pic' src="{{ post.attachment.url }}" alt="{{ post.title }}" />
+                            {% endif %}
+                            <div class="text">{{post.text}}</div>
+                        </div>
+                        <p class='category'>Category: <em class="em-category">{{ post.category }}</em></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p id='message'>No news found.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

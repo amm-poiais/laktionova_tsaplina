@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}Blog{% endblock %}
+
+{% block title %}Blog - Main{% endblock %}
 
 {% block main_column %}
-    <p>
-        News:
-    </p>
-    <div id="news">
-        {% for post in news %}
-            <div class="news">
-                <h2>{{post.title}}</h2>
-                <p>{{post.text}}</p>
-                {% if post.attachment %}
-                    <img src="{{ post.attachment.url }}" width="300" height="200" alt="{{ post.title }}" />
-                {% endif %}
-                <p>Posted on {{post.timestamp}}</p>s
-                {% empty %}
-                <p>No news.</p>
-            </div>
-        {% endfor %}
+    <div id='news'>
+        {% if news %}
+            {% for post in news %}
+                <div class='news'>
+                    <div class='post-title'>{{post.title}}</div>
+                    <p class='pub-data'>Posted on {{post.timestamp}} by <b>{{ post.user.username }}</b></p>
+                    <div class="content">
+                        {% if post.attachment %}
+                            <img src="{{ post.attachment.url }}" alt="{{ post.title }}" class='pic'/>
+                        {% endif %}
+                        <div class="text">{{post.text}}</div>
+                    </div>
+                    <p class='category'>Category: <em class="em-category">{{ post.category }}</em></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p id='message'>No news yet :(</p>
+        {% endif %}
     </div>
 {% endblock %}

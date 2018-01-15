@@ -1,5 +1,23 @@
-<form action="" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Register</button>
-</form>
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block main_column %}
+    <div id="page-title">Sign up!</div>
+    <form id='fm-signup' method="post">
+      {% csrf_token %}
+       <ul class="errorlist2">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+       {% endfor %}
+       </ul>
+      {{ form.as_p }}
+      <p align="center">
+          <input type="submit" value="Register"/>
+      </p>
+    </form>
+{% endblock %}
